@@ -1,0 +1,37 @@
+body {
+    background-color: #e9ecef; /* Light gray background for the entire page */
+}
+
+.card {
+    margin-top: 20px;
+    border-radius: 10px; /* Rounded corners for cards */
+}
+
+.table {
+    margin-top: 20px;
+    border-radius: 10px; /* Rounded corners for table */
+}
+
+.table thead {
+    background-color: #28a745; /* Green header background */
+    color: white;
+}
+
+.table tbody tr:hover {
+    background-color: #f0f0f0; /* Light gray hover effect on rows */
+}
+
+.table-striped tbody tr:nth-of-type(odd) {
+    background-color: #ffffff; /* White background for odd rows */
+}
+
+/* Custom button styles */
+.btn-outline-danger {
+    color: #dc3545; /* Red color for button text */
+    border-color: #dc3545; /* Red border */
+}
+
+.btn-outline-danger:hover {
+    background-color: #dc3545; /* Red background on hover */
+    color: white; /* White text on hover */
+}

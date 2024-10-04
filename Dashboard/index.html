@@ -1,0 +1,245 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>POS System - Modern Dashboard</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css"> <!-- Font Awesome -->
+    <style>
+        body {
+            background-color: #f8f9fa;
+            font-family: 'Roboto', sans-serif;
+            background-image: url('https://www.example.com/path-to-your-image.jpg'); /* Replace with your image URL */
+            background-size: cover;
+            background-position: center;
+        }
+
+        .navbar {
+            background-color: #FFD700; /* Gold color for navbar */
+        }
+
+        .navbar-brand {
+            font-size: 1.5rem;
+            font-weight: bold;
+            color: #343a40;
+        }
+
+        .card {
+            border-radius: 15px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s ease;
+            height: 150px; /* Increased height for cards */
+        }
+
+        .card:hover {
+            transform: translateY(-10px);
+        }
+
+        .dashboard-title {
+            font-size: 2.5rem;
+            font-weight: bold;
+            color: #343a40;
+        }
+
+        /* Card Text Styling */
+        .card-title {
+            font-size: 1.5rem; /* Increased font size for the title */
+            font-weight: bold; /* Bold title */
+            text-align: center; /* Center title text */
+        }
+
+        .card-text {
+            font-size: 1.25rem; /* Increased font size for the text */
+            font-weight: bold; /* Bold text */
+            text-align: center; /* Center text */
+        }
+
+        /* Table Section */
+        .table-container {
+            background-color: rgba(255, 255, 255, 0.8); /* Semi-transparent background */
+            padding: 20px;
+            border-radius: 15px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            backdrop-filter: blur(5px);
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px; /* Space above the table */
+        }
+
+        thead th {
+            background-color: #343a40;
+            color: #fff;
+            padding: 15px;
+            text-align: left;
+            position: relative;
+        }
+
+        tbody td {
+            padding: 15px;
+            border-bottom: 1px solid #ddd;
+        }
+
+        tbody tr {
+            transition: background-color 0.3s ease;
+        }
+
+        tbody tr:hover {
+            background-color: rgba(0, 0, 0, 0.1); /* Darker grey on hover */
+            transform: scale(1.01);
+            transition: transform 0.2s ease-in-out;
+        }
+
+        /* Recent Orders Title */
+        .recent-orders-title {
+            font-size: 1.8rem;
+            font-weight: bold;
+            color: #343a40;
+            margin-bottom: 15px;
+            text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.2);
+            text-align: center; /* Center the title */
+        }
+
+        .badge {
+            padding: 8px; /* Padding for badges */
+            font-size: 0.85rem; /* Smaller font for badges */
+            border-radius: 12px; /* Rounded badges */
+        }
+
+        /* Scroll effect for large tables */
+        .table-responsive {
+            max-height: 400px;
+            overflow-y: auto;
+        }
+    </style>
+</head>
+<body>
+<nav class="navbar navbar-expand-lg justify-content-center">
+    <div class="container-fluid">
+        <a class="navbar-brand" href="#">POS System</a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
+                aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNav">
+            <button class="btn btn-danger ms-auto">
+                Logout
+            </button>
+        </div>
+    </div>
+</nav>
+
+<div class="container mt-5">
+    <div class="row mt-4">
+        <!-- Total Customers -->
+        <div class="col-md-3 mb-4">
+            <div class="card" style="background-color: #C68FE6; color: white;">
+                <div class="card-body">
+                    <h5 class="card-title">Total Customers</h5>
+                    <p class="card-text">150</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Total Items -->
+        <div class="col-md-3 mb-4">
+            <div class="card" style="background-color: #41B3A2; color: white;">
+                <div class="card-body">
+                    <h5 class="card-title">Total Items</h5>
+                    <p class="card-text">50</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Total Orders -->
+        <div class="col-md-3 mb-4">
+            <div class="card" style="background-color: #FF4E88; color: white;">
+                <div class="card-body">
+                    <h5 class="card-title">Total Orders</h5>
+                    <p class="card-text">200</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Total Sales -->
+        <div class="col-md-3 mb-4">
+            <div class="card" style="background-color: #3ABEF9; color: white;">
+                <div class="card-body">
+                    <h5 class="card-title">Total Sales</h5>
+                    <p class="card-text">Rs 5,000</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Recent Orders Section -->
+    <div class="table-container mt-5">
+        <h2 class="recent-orders-title">Recent Orders</h2>
+        <div class="table-responsive">
+            <table class="table table-striped table-hover">
+                <thead>
+                <tr>
+                    <th>Order ID</th>
+                    <th>Customer</th>
+                    <th>Status</th>
+                    <th>Date</th>
+                    <th>Amount</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr>
+                    <td>ORD001</td>
+                    <td>TM.DILSHAN</td>
+                    <td><i class="fas fa-check-circle text-success"></i></td> <!-- Completed -->
+                    <td>2024-01-01</td>
+                    <td>Rs 56,000</td>
+                </tr>
+                <tr>
+                    <td>ORD002</td>
+                    <td>KAMINDU MENDIS</td>
+                    <td><i class="fas fa-clock text-warning"></i></td> <!-- Pending -->
+                    <td>2024-05-22</td>
+                    <td>Rs 76,500</td>
+                </tr>
+                <tr>
+                    <td>ORD003</td>
+                    <td>DASUN SHANAKA</td>
+                    <td><i class="fas fa-times-circle text-danger"></i></td> <!-- Cancelled -->
+                    <td>2024-09-05</td>
+                    <td>Rs 300,000</td>
+                </tr>
+                  <tr>
+                    <td>ORD004</td>
+                    <td>STIVE SMITH</td>
+                      <td><i class="fas fa-clock text-warning"></i></td> <!-- Pending -->
+                    <td>2024-09-25</td>
+                    <td>Rs 360,000</td>
+                </tr>
+                <tr>
+                    <td>ORD003</td>
+                    <td>KIRAN POLLARD</td>
+                    <td><i class="fas fa-check-circle text-success"></i></td> <!-- Completed -->
+                    <td>2024-09-005</td>
+                    <td>Rs 670,000</td>
+                </tr>
+                <tr>
+                    <td>ORD003</td>
+                    <td>BRN STOKES</td>
+                    <td><i class="fas fa-clock text-warning"></i></td> <!-- Pending -->
+                    <td>2024-09-005</td>
+                    <td>Rs 780,000</td>
+                </tr>
+
+
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>
