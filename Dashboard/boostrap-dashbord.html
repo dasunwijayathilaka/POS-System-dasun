@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>POS System - Modern Dashboard</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css"> <!-- Font Awesome -->
+</head>
+<body>
+<!-- Navbar -->
+<nav class="navbar navbar-expand-lg justify-content-center" style="background-color: #FFD700;">
+    <div class="container-fluid">
+        <a class="navbar-brand text-dark" href="#">POS System</a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
+                aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNav">
+            <ul class="navbar-nav">
+                <li class="nav-item">
+                    <a class="nav-link text-dark" href="../index.html">Dashboard</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link text-dark active" href="customer.html">Customer</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link text-dark" href="../item/item.html">Item</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link text-dark" href="../order/order.html">Order</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link text-dark" href="../order-details/order-details.html">Order details</a>
+                </li>
+            </ul>
+            <button class="btn btn-danger ms-auto">
+                Logout
+            </button>
+        </div>
+    </div>
+</nav>
+
+
+
+
+
+
+<div class="container mt-5">
+    <div class="row mt-4">
+        <!-- Total Customers -->
+        <div class="col-md-3 mb-4">
+            <div class="card text-center" style="background-color: #C68FE6; color: white; height: 170px; border-radius: 15px;">
+                <div class="card-body">
+                    <h5 class="card-title fw-bold" style="font-size: 1.75rem;">Total Customers</h5>
+                    <p class="card-text" style="font-size: 2rem; font-weight: bold;">150</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Total Items -->
+        <div class="col-md-3 mb-4">
+            <div class="card text-center" style="background-color: #41B3A2; color: white; height: 170px; border-radius: 15px;">
+                <div class="card-body">
+                    <h5 class="card-title fw-bold" style="font-size: 1.75rem;">Total Items</h5>
+                    <p class="card-text" style="font-size: 2rem; font-weight: bold;">50</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Total Orders -->
+        <div class="col-md-3 mb-4">
+            <div class="card text-center" style="background-color: #FF4E88; color: white; height: 170px; border-radius: 15px;">
+                <div class="card-body">
+                    <h5 class="card-title fw-bold" style="font-size: 1.75rem;">Total Orders</h5>
+                    <p class="card-text" style="font-size: 2rem; font-weight: bold;">200</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Total Sales -->
+        <div class="col-md-3 mb-4">
+            <div class="card text-center" style="background-color: #3ABEF9; color: white; height: 170px; border-radius: 15px;">
+                <div class="card-body">
+                    <h5 class="card-title fw-bold" style="font-size: 1.75rem;">Total Sales</h5>
+                    <p class="card-text" style="font-size: 2rem; font-weight: bold;">Rs 5,000</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Recent Orders Section -->
+    <div class="table-responsive mt-5" style="background-color: white; padding: 30px; border-radius: 15px; border: 1px solid #ddd;">
+        <h2 class="text-center fw-bold">Recent Orders</h2>
+        <table class="table table-striped table-hover mt-4">
+            <thead>
+            <tr>
+                <th>Order ID</th>
+                <th>Customer</th>
+                <th>Status</th>
+                <th>Date</th>
+                <th>Amount</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr>
+                <td>ORD001</td>
+                <td>TM.DILSHAN</td>
+                <td><i class="fas fa-check-circle text-success"></i></td> <!-- Completed -->
+                <td>2024-01-01</td>
+                <td>Rs 56,000</td>
+            </tr>
+            <tr>
+                <td>ORD002</td>
+                <td>KAMINDU MENDIS</td>
+                <td><i class="fas fa-clock text-warning"></i></td> <!-- Pending -->
+                <td>2024-05-22</td>
+                <td>Rs 76,500</td>
+            </tr>
+            <tr>
+                <td>ORD003</td>
+                <td>DASUN SHANAKA</td>
+                <td><i class="fas fa-times-circle text-danger"></i></td> <!-- Cancelled -->
+                <td>2024-09-05</td>
+                <td>Rs 300,000</td>
+            </tr>
+            <tr>
+                <td>ORD004</td>
+                <td>STIVE SMITH</td>
+                <td><i class="fas fa-clock text-warning"></i></td> <!-- Pending -->
+                <td>2024-09-25</td>
+                <td>Rs 360,000</td>
+            </tr>
+            <tr>
+                <td>ORD005</td>
+                <td>KIRAN POLLARD</td>
+                <td><i class="fas fa-check-circle text-success"></i></td> <!-- Completed -->
+                <td>2024-09-05</td>
+                <td>Rs 670,000</td>
+            </tr>
+            <tr>
+                <td>ORD006</td>
+                <td>BRN STOKES</td>
+                <td><i class="fas fa-clock text-warning"></i></td> <!-- Pending -->
+                <td>2024-09-05</td>
+                <td>Rs 780,000</td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>
