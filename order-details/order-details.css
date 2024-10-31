@@ -1,104 +1,67 @@
-/* Container for the form */
-.container {
-    padding: 30px;
-    background-color: #f8f9fa;
-    border-radius: 10px;
-    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
-}
-
-/* Title */
-h2 {
-    text-align: center;
-    margin-bottom: 20px;
-    color: #333;
-}
-
-/* Search Section */
-.search-section {
+/*logout button*/
+.Btn {
     display: flex;
-    justify-content: space-between;
     align-items: center;
-    margin-bottom: 20px;
-}
-
-.search-section input, .search-section select, .search-section button {
+    justify-content: flex-start;
+    width: 45px;
     height: 45px;
-    font-size: 1.1em;
-}
-
-/* Order Information */
-.form-group p {
-    background-color: #fff;
-    padding: 10px;
-    border: 1px solid #ccc;
-    border-radius: 5px;
-}
-
-.order-info .form-group label {
-    font-weight: bold;
-    color: #555;
-}
-
-.order-info {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 20px;
-    margin-bottom: 20px;
-}
-
-/* Price Details */
-.price-details {
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    gap: 20px;
-}
-
-.price-details .form-group p {
-    background-color: #fff;
-    padding: 10px;
-    border: 1px solid #ccc;
-    border-radius: 5px;
-    text-align: right;
-}
-
-/* Items Table */
-.table {
-    width: 100%;
-    margin-top: 20px;
-    border: 1px solid #ddd;
-}
-
-.table th, .table td {
-    padding: 12px;
-    text-align: center;
-}
-
-.table th {
-    background-color: #343a40;
-    color: #fff;
-}
-
-.table tbody tr:hover {
-    background-color:gold;
+    border: none;
+    border-radius: 50%;
     cursor: pointer;
+    position: relative;
+    overflow: hidden;
+    transition-duration: .3s;
+    box-shadow: 2px 2px 10px rgba(0, 0, 0, 0.199);
+    background-color: rgb(255, 65, 65);
 }
 
-.table-striped tbody tr:nth-of-type(odd) {
-    background-color:green;
+/* plus sign */
+.sign {
+    width: 100%;
+    transition-duration: .3s;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
 
-/* Buttons */
-button.btn {
-    font-size: 1.1em;
-    padding: 10px 20px;
-    border-radius: 5px;
+.sign svg {
+    width: 17px;
 }
 
-.btn-primary {
-    background-color: #28a745;
-    border-color: #28a745;
+.sign svg path {
+    fill: white;
+}
+/* text */
+.text {
+    position: absolute;
+    right: 0%;
+    width: 0%;
+    opacity: 0;
+    color: white;
+    font-size: 1.2em;
+    font-weight: 600;
+    transition-duration: .3s;
+}
+/* hover effect on button width */
+.Btn:hover {
+    width: 125px;
+    border-radius: 40px;
+    transition-duration: .3s;
 }
 
-.btn-primary:hover {
-    background-color: #218838;
+.Btn:hover .sign {
+    width: 30%;
+    transition-duration: .3s;
+    padding-left: 20px;
+}
+/* hover effect button's text */
+.Btn:hover .text {
+    opacity: 1;
+    width: 70%;
+    transition-duration: .3s;
+    padding-right: 10px;
+}
+/* button click effect*/
+.Btn:active {
+    transform: translate(2px ,2px);
 }

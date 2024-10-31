@@ -14,49 +14,50 @@
 </head>
 <body>
 <!--navigation bar-->
-<nav class="navbar navbar-expand-lg justify-content-center" style="background-color: #FFD700;">
+<nav class="navbar navbar-expand-lg navbar-dark " style="background-color: #022b3a">
   <div class="container-fluid">
-    <a class="navbar-brand text-dark" href="#">POS System</a>
-    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
-            aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+    <a class="navbar-brand" href="#">POS System</a>
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
       <span class="navbar-toggler-icon"></span>
     </button>
     <div class="collapse navbar-collapse" id="navbarNav">
       <ul class="navbar-nav">
         <li class="nav-item">
-          <a class="nav-link text-dark" href="../index.html">Dashboard</a>
+          <a class="nav-link" href="../index.html">Dashboard</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link text-dark" href="../customer/customer.html">Customer</a>
+          <a class="nav-link" href="../customer/customer.html">Customer</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link text-dark active" href="item.html">Item</a>
+          <a class="nav-link" href="../item/item.html">Item</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link text-dark" href="../order/order.html">Order</a>
+          <a class="nav-link active" href="order.html">Order</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link text-dark" href="../order-details/order-details.html">Order details</a>
+          <a class="nav-link" href="../order-details/order-details.html">Order details</a>
         </li>
       </ul>
-      <button class="btn btn-danger ms-auto">
-        Logout
+      <!-- Pushes the logout button to the right -->
+      <button class="Btn ms-auto">
+        <div class="sign">
+          <svg viewBox="0 0 512 512"><path d="M377.9 105.9L500.7 228.7c7.2 7.2 11.3 17.1 11.3 27.3s-4.1 20.1-11.3 27.3L377.9 406.1c-6.4 6.4-15 9.9-24 9.9c-18.7 0-33.9-15.2-33.9-33.9l0-62.1-128 0c-17.7 0-32-14.3-32-32l0-64c0-17.7 14.3-32 32-32l128 0 0-62.1c0-18.7 15.2-33.9 33.9-33.9c9 0 17.6 3.6 24 9.9zM160 96L96 96c-17.7 0-32 14.3-32 32l0 256c0 17.7 14.3 32 32 32l64 0c17.7 0 32 14.3 32 32s-14.3 32-32 32l-64 0c-53 0-96-43-96-96L0 128C0 75 43 32 96 32l64 0c17.7 0 32 14.3 32 32s-14.3 32-32 32z"></path></svg>
+        </div>
+        <div class="text">Logout</div>
       </button>
     </div>
   </div>
 </nav>
 
-
 <!--content container-->
-<div class="container mt-5 border" style="background-color: white">
-  <h1 class="mb-4 text-center">Place Order</h1> <!-- Added text-center class -->
+<div class="container mt-5 border" style="background-color: #f8f9fa">
+  <h1 class="mb-4">Place Order</h1>
   <div class="row">
-
 
     <!--Invoice details card-->
     <div class="col-lg-4 mt-3">
       <div class="card">
-        <div class="card-header" style="background-color: darkcyan; color: black">
+        <div class="card-header" style="background-color: darkgray; color: white">
           Invoice details
         </div>
         <div class="p-3">
@@ -113,7 +114,7 @@
     <!--Item select card-->
     <div class="col-lg-5 mt-3">
       <div class="card">
-        <div class="card-header" style="background-color: darkcyan; color: black">
+        <div class="card-header" style="background-color: darkgray; color: white">
           Item details
         </div>
 
@@ -166,7 +167,7 @@
 
         <!--add to cart button-->
         <button class="cartBtn m-3 ">
-          <svg class="cart" fill="gold" viewBox="0 0 576 512" height="1em" xmlns="http://www.w3.org/2000/svg"><path d="M0 24C0 10.7 10.7 0 24 0H69.5c22 0 41.5 12.8 50.6 32h411c26.3 0 45.5 25 38.6 50.4l-41 152.3c-8.5 31.4-37 53.3-69.5 53.3H170.7l5.4 28.5c2.2 11.3 12.1 19.5 23.6 19.5H488c13.3 0 24 10.7 24 24s-10.7 24-24 24H199.7c-34.6 0-64.3-24.6-70.7-58.5L77.4 54.5c-.7-3.8-4-6.5-7.9-6.5H24C10.7 48 0 37.3 0 24zM128 464a48 48 0 1 1 96 0 48 48 0 1 1 -96 0zm336-48a48 48 0 1 1 0 96 48 48 0 1 1 0-96z"></path></svg>
+          <svg class="cart" fill="white" viewBox="0 0 576 512" height="1em" xmlns="http://www.w3.org/2000/svg"><path d="M0 24C0 10.7 10.7 0 24 0H69.5c22 0 41.5 12.8 50.6 32h411c26.3 0 45.5 25 38.6 50.4l-41 152.3c-8.5 31.4-37 53.3-69.5 53.3H170.7l5.4 28.5c2.2 11.3 12.1 19.5 23.6 19.5H488c13.3 0 24 10.7 24 24s-10.7 24-24 24H199.7c-34.6 0-64.3-24.6-70.7-58.5L77.4 54.5c-.7-3.8-4-6.5-7.9-6.5H24C10.7 48 0 37.3 0 24zM128 464a48 48 0 1 1 96 0 48 48 0 1 1 -96 0zm336-48a48 48 0 1 1 0 96 48 48 0 1 1 0-96z"></path></svg>
           ADD TO CART
           <svg xmlns="http://www.w3.org/2000/svg" height="1em" viewBox="0 0 640 512" class="product"><path d="M211.8 0c7.8 0 14.3 5.7 16.7 13.2C240.8 51.9 277.1 80 320 80s79.2-28.1 91.5-66.8C413.9 5.7 420.4 0 428.2 0h12.6c22.5 0 44.2 7.9 61.5 22.3L628.5 127.4c6.6 5.5 10.7 13.5 11.4 22.1s-2.1 17.1-7.8 23.6l-56 64c-11.4 13.1-31.2 14.6-44.6 3.5L480 197.7V448c0 35.3-28.7 64-64 64H224c-35.3 0-64-28.7-64-64V197.7l-51.5 42.9c-13.3 11.1-33.1 9.6-44.6-3.5l-56-64c-5.7-6.5-8.5-15-7.8-23.6s4.8-16.6 11.4-22.1L137.7 22.3C155 7.9 176.7 0 199.2 0h12.6z"></path></svg>
         </button>
@@ -177,7 +178,7 @@
     <!--Order Price Summary Div-->
     <div class="col-lg-3 mt-3">
       <div class="card searchCustomerCard">
-        <div class="card-header" id="OrderPriceCardTitle" style="background-color: darkcyan; color: black; padding: 8px;">
+        <div class="card-header" id="OrderPriceCardTitle" style="background-color: forestgreen; color: white; padding: 8px;">
           Total Price
         </div>
         <div class="card-body p-2">
@@ -237,9 +238,9 @@
     <tbody>
     <tr>
       <td>1</td>
-      <td>MANGO</td>
-      <td>RS.50.00</td>
-      <td>5</td>
+      <td>Apple</td>
+      <td>50.00</td>
+      <td>2</td>
       <td>100.00</td>
       <td>
         <button class="btn btn-danger btn-sm">Remove</button>
@@ -247,8 +248,8 @@
     </tr>
     <tr>
       <td>4</td>
-      <td>GARLIK</td>
-      <td>RS.60.00</td>
+      <td>Orange</td>
+      <td>60.00</td>
       <td>1</td>
       <td>60.00</td>
       <td>
@@ -257,8 +258,8 @@
     </tr>
     <tr>
       <td>8</td>
-      <td>TOMATO</td>
-      <td>RS.200.00</td>
+      <td>Milk</td>
+      <td>200.00</td>
       <td>2</td>
       <td>400.00</td>
       <td>

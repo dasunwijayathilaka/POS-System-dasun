@@ -1,0 +1,1007 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>POS System - Dashboard</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/css/bootstrap.min.css" rel="stylesheet">
+
+    <link rel="stylesheet" href="customer/customer.css">
+    <link rel="stylesheet" href="order-details/order-details.css">
+    <link rel="stylesheet" href="order/order.css">
+    <link rel="stylesheet" href="item/item.css">
+</head>
+<style>
+
+    body {
+        background-image: url('assets/images/pexels-serpstat-177219-572056.jpg'); /* Replace with your image URL */
+        background-size: 3000px;
+        background-position: center;  /* Centers the background image */
+        background-repeat: no-repeat;  /* Prevents the image from repeating */
+        font-family: Arial, sans-serif; /* Example of a font that can be globally set */
+    }
+
+    .logout-btn {
+        display: flex;
+        align-items: center;
+        padding: 10px 20px;
+        background-color: gray; /* Red color */
+        color: black;
+        border: none;
+        border-radius: 8px;
+        cursor: pointer;
+        transition: background-color 0.3s ease, transform 0.3s ease;
+    }
+
+    /*.logout-btn:hover {
+        background-color: #d32f2f; !* Darker red on hover *!
+        transform: scale(1.05);
+    }*/
+
+   /* .logout-sign {
+        margin-right: 10px;
+    }*/
+
+  /*  .logout-icon {
+        width: 24px;
+        height: 24px;
+        fill: white;
+    }*/
+
+   /* .logout-text {
+        font-size: 16px;
+        font-weight: bold;
+    }*/
+
+/*navvigation bar font */
+    .nav-link {
+        font-weight: bold;
+    }
+
+
+
+    /* text */
+    .text {
+        position: absolute;
+        right: 0%;
+        width: 0%;
+        opacity: 0;
+        color: #071851;
+        font-size: 1.2em;
+        font-weight: 600;
+        transition-duration: .3s;
+    }
+    /* hover effect on button width */
+    .Btn:hover {
+        width: 125px;
+        border-radius: 40px;
+        transition-duration: .3s;
+    }
+
+    .Btn:hover .sign {
+        width: 30%;
+        transition-duration: .3s;
+        padding-left: 20px;
+    }
+    /* hover effect button's text */
+    .Btn:hover .text {
+        opacity: 1;
+        width: 70%;
+        transition-duration: .3s;
+        padding-right: 10px;
+    }
+    /* button click effect*/
+    .Btn:active {
+        transform: translate(2px ,2px);
+    }
+    .custom-navbar .nav-link {
+        color: black !important; /* Use !important to override Bootstrap's default styling */
+    }
+
+    .custom-navbar .navbar-brand {
+        color: black !important; /* For the brand text */
+    }
+
+
+
+     .card:hover {
+         transform: scale(1.05); /* Gently scales the card */
+         transition: transform 0.3s ease; /* Smooth transition */
+         box-shadow: 0px 4px 15px rgb(17, 209, 59); /* Adds shadow effect */
+     }
+
+     /*
+
+         !* Card transition with gradient background on hover *!
+     .card {
+
+
+       .card {
+         background: linear-gradient(135deg, #ba09df, #28a745);
+         transition: background-position 0.5s ease, transform 0.4s ease;
+         background-size: 200% 200%;
+     }
+
+       .card {
+         background: linear-gradient(135deg, #e6a80f, #28a745);
+                background: linear-gradient(135deg, #17a2b8, #28a745);
+         transition: background-position 0.5s ease, transform 0.4s ease;
+         background-size: 200% 200%;
+     }
+
+       .card {
+         background: linear-gradient(135deg, #e4051f, #28a745);
+         transition: background-position 0.5s ease, transform 0.4s ease;
+         background-size: 200% 200%;
+     } transition: background-position 0.5s ease, transform 0.4s ease;
+         background-size: 200% 200%;
+     }
+     */
+
+
+
+    card:hover {
+        background-position: right center; /* Shifts the gradient on hover */
+        transform: scale(1.08); /* Slightly enlarge card on hover */
+        box-shadow: 0px 8px 20px rgb(248, 192, 50);
+    }
+
+    /* Table row slide-in transition on hover */
+    .table-striped tbody tr {
+        transition: transform 0.3s ease, background-color 0.3s ease;
+    }
+
+    .table-striped tbody tr:hover {
+        background-color: #11d13b; /* Light background color on hover */
+        transform: translateX(10px); /* Slide the row to the right on hover */
+    }
+
+
+
+</style>
+<body>
+<nav class="navbar navbar-expand-lg navbar-dark" style="background-color: #ffffff">
+    <div class="container-fluid">
+<!--
+        <a class="navbar-brand text-black" href="#">POS System</a>
+-->
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNav">
+            <ul class="navbar-nav">
+                <li class="nav-item">
+                    <a class="nav-link text-black font-weight-bold" id="dashboard-nav">Dashboard</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link text-black font-weight-bold" id="customer-nav">Customer</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link text-black font-weight-bold" id="item-nav">Item</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link text-black font-weight-bold" id="order-nav">Order</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link text-black font-weight-bold" id="order-details-nav">Order details</a>
+                </li>
+            </ul>
+
+            <button class="logout-btn ms-auto">
+                <div class="logout-sign">
+                    <svg viewBox="0 0 512 512" class="logout-icon">
+                        <path d="M377.9 105.9L500.7 228.7c7.2 7.2 11.3 17.1 11.3 27.3s-4.1 20.1-11.3 27.3L377.9 406.1c-6.4 6.4-15 9.9-24 9.9c-18.7 0-33.9-15.2-33.9-33.9l0-62.1-128 0c-17.7 0-32-14.3-32-32l0-64c0-17.7 14.3-32 32-32l128 0 0-62.1c0-18.7 15.2-33.9 33.9-33.9c9 0 17.6 3.6 24 9.9zM160 96L96 96c-17.7 0-32 14.3-32 32l0 256c0 17.7 14.3 32 32 32l64 0c17.7 0 32 14.3 32 32s-14.3 32-32 32l-64 0c-53 0-96-43-96-96L0 128C0 75 43 32 96 32l64 0c17.7 0 32 14.3 32 32s-14.3 32-32 32z"></path>
+                    </svg>
+                </div>
+                <div class="logout-text">Logout</div>
+            </button>
+
+        </div>
+    </div>
+</nav>
+
+
+<div class="container mt-5" id="dashboard-section" style="background-color: white">
+    <h1 class="mb-4 text-center">Dashboard</h1>
+    <div class="row">
+        <!-- Total Customers Card -->
+        <div class="col-lg-3 col-md-6 mb-4">
+            <div class="card shadow" style="background-color: rgb(198,143,230); color: rgb(0, 0, 0); height: 200px;">
+            <div class="card-body text-center">
+                    <h5 class="card-title">Total Customers</h5>
+                    <p class="card-text" id="totalCustomers" style="font-size: 50px; font-weight: bold">150</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Total Items Card -->
+        <div class="col-lg-3 col-md-6 mb-4">
+            <div class="card shadow" style="background-color: rgb(65,179,162); color: rgb(0, 0, 0); height: 200px;">
+                <div class="card-body text-center">
+                    <h5 class="card-title">Total Items</h5>
+                    <p class="card-text" id="totalItems" style="font-size: 50px; font-weight: bold">50</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Total Orders Card -->
+        <div class="col-lg-3 col-md-6 mb-4">
+            <div class="card shadow" style="background-color: rgb(255,78,136); color: rgb(0, 0, 0); height: 200px;">
+                <div class="card-body text-center">
+                    <h5 class="card-title">Total Orders</h5>
+                    <p class="card-text" id="totalOrders" style="font-size: 50px; font-weight: bold">200</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Total Sales Card -->
+        <div class="col-lg-3 col-md-6 mb-4">
+            <div class="card shadow" style="background-color: rgb(58,190,249); color: rgb(0, 0, 0); height: 200px;">
+                <div class="card-body text-center">
+                    <h5 class="card-title">Total Sales</h5>
+                    <p class="card-text" id="totalSales" style="font-size: 50px; font-weight: bold">Rs 5,000</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Recent Orders Section -->
+    <h3 class="mb-3 text-center">Recent Orders</h3>
+    <table class="table table-striped">
+        <thead>
+        <tr>
+            <th>Order ID</th>
+            <th>Customer</th>
+            <th>Status</th>
+            <th>Date</th>
+            <th>Total (Rs)</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr>
+            <td>ORD001</td>
+            <td>TM.DILSHAN</td>
+            <td><i class="fas fa-check-circle text-success"></i></td> <!-- Completed -->
+            <td>2024-01-01</td>
+            <td>Rs 56,000</td>
+        </tr>
+        <tr>
+            <td>ORD002</td>
+            <td>KAMINDU MENDIS</td>
+            <td><i class="fas fa-clock text-warning"></i></td> <!-- Pending -->
+            <td>2024-05-22</td>
+            <td>Rs 76,500</td>
+        </tr>
+        <tr>
+            <td>ORD003</td>
+            <td>DASUN SHANAKA</td>
+            <td><i class="fas fa-times-circle text-danger"></i></td> <!-- Cancelled -->
+            <td>2024-09-05</td>
+            <td>Rs 300,000</td>
+        </tr>
+        <tr>
+            <td>ORD004</td>
+            <td>STIVE SMITH</td>
+            <td><i class="fas fa-clock text-warning"></i></td> <!-- Pending -->
+            <td>2024-09-25</td>
+            <td>Rs 360,000</td>
+        </tr>
+        <tr>
+            <td>ORD005</td>
+            <td>KIRAN POLLARD</td>
+            <td><i class="fas fa-check-circle text-success"></i></td> <!-- Completed -->
+            <td>2024-09-05</td>
+            <td>Rs 670,000</td>
+        </tr>
+        <tr>
+            <td>ORD006</td>
+            <td>BRN STOKES</td>
+            <td><i class="fas fa-clock text-warning"></i></td> <!-- Pending -->
+            <td>2024-09-05</td>
+            <td>Rs 780,000</td>
+        </tr>
+        </tbody>
+    </table>
+</div>
+
+<!-- Include Font Awesome CDN -->
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+
+
+
+
+
+
+
+<!--Customer-->
+<div class="container mt-5" id="customer-section" style="background-color: #f8f9fa">
+    <h1 class="mb-4 text-center">Customer Managment</h1>
+
+    <!-- Search Bar and Dropdown -->
+    <div class="row mb-3">
+        <div class="col-lg-4">
+            <input type="text" class="form-control" placeholder="Search customer...">
+        </div>
+        <div class="col-lg-4">
+            <select class="form-select" aria-label="Select item category">
+                <option selected>Search by</option>
+                <option value="1">ID</option>
+                <option value="2">Name</option>
+                <option value="3">Phone number</option>
+                <option value="3">Address</option>
+            </select>
+        </div>
+        <div class="col-lg-4">
+            <button class="btn btn-primary">Search</button>
+        </div>
+    </div>
+
+    <div class="row">
+
+        <!-- Form Column -->
+        <div class="col-lg-4">
+            <div class="card shadow-lg" style="border-color: #fab812;">
+                <div class="card-header text-black" style="background-color: #11d13b;">
+                    <h5 class="mb-0">Register Customer</h5>
+                </div>
+                <div class="card-body">
+                    <form>
+                        <div class="mb-3">
+                            <label for="customerID" class="form-label">ID</label>
+                            <input type="number" class="form-control" id="customID" required>
+                        </div>
+                        <div class="mb-3">
+                            <label for="customerName" class="form-label">Name</label>
+                            <input type="text" class="form-control" id="customName" required>
+                        </div>
+                        <div class="mb-3">
+                            <label for="customerAddress" class="form-label">Address</label>
+                            <input type="text" class="form-control" id="customAddress" required>
+                        </div>
+                        <div class="mb-3">
+                            <label for="customTel" class="form-label">Tel</label>
+                            <input type="tel" class="form-control" id="customTel" required>
+                        </div>
+                        <div class="d-flex justify-content-between">
+                            <button type="button" class="btn btn-outline-danger">Clear</button>
+                            <button type="button" class="btn btn-outline-danger">Delete</button>
+                            <button type="button" class="btn btn-outline-danger">Update</button>
+                            <button type="button" class="btn btn-outline-danger">Save</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+
+        <!-- Table Column -->
+        <script src="assets/Jquery/jquery-3.7.1.min.js"></script>
+        <script src="customer"></script>
+
+
+        <div class="col-lg-8">
+            <div class="card shadow-lg" style="border-color: #fbb502;">
+                <div class="card-header  text-black" style="background-color: #11d13b;">
+                    <h5 class="mb-0">Customer List</h5>
+                </div>
+                <div class="table-responsive">
+                    <table class="table table-hover table-striped">
+                        <thead>
+                        <tr>
+                            <th scope="col">ID</th>
+                            <th scope="col">Name</th>
+                            <th scope="col">Address</th>
+                            <th scope="col">Tel</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <tr>
+                            <th scope="row">1</th>
+                            <td>BEN</td>
+                            <td>LONDON</td>
+                            <td>0984356765</td>
+                        </tr>
+                        <tr>
+                            <th scope="row">2</th>
+                            <td>SMITH</td>
+                            <td>ADILADE</td>
+                            <td>09714545321</td>
+                        </tr>
+                        <tr>
+                            <th scope="row">3</th>
+                            <td>VIRAT</td>
+                            <td>MUMBAI</td>
+                            <td>09186765454</td>
+                        </tr>
+                        <tr>
+                            <th scope="row">4</th>
+                            <td>SANGAKKARA</td>
+                            <td>COLOMBO</td>
+                            <td>09486756543</td>
+                        </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+
+
+
+
+
+<!--Item-->
+<div class="container mt-5 border" id="item-section" style="background-color: #f8f9fa">
+    <h1 class="mb-4 text-center">Items Managment</h1>
+
+    <!-- Search Bar and Dropdown -->
+    <div class="row mb-3">
+        <div class="col-lg-4">
+            <input type="text" class="form-control" placeholder="Search items...">
+        </div>
+        <div class="col-lg-4">
+            <select class="form-select" aria-label="Select item category">
+                <option selected>Search by</option>
+                <option value="1">ID</option>
+                <option value="2">Name</option>
+            </select>
+        </div>
+        <div class="col-lg-4">
+            <button class="btn btn-primary">Search</button>
+        </div>
+    </div>
+
+
+    <div class="row">
+        <!-- Form Column -->
+        <div class="col-lg-4">
+            <div class="card border-warning">
+                <div class="card-header bg-warning text-dark">
+                    <h5 class="mb-0">Register Item</h5>
+                </div>
+                <div class="card-body">
+                    <form>
+                        <div class="mb-3">
+                            <label for="itemID" class="form-label">ID</label>
+                            <input type="number" class="form-control" id="itemID" required>
+                        </div>
+                        <div class="mb-3">
+                            <label for="itemName" class="form-label">Name</label>
+                            <input type="text" class="form-control" id="itemName" required>
+                        </div>
+                        <div class="mb-3">
+                            <label for="itemCategory" class="form-label">Category</label>
+                            <input type="text" class="form-control" id="itemCategory" required>
+                        </div>
+                        <div class="mb-3">
+                            <label for="itemPrice" class="form-label">Price</label>
+                            <input type="number" class="form-control" id="itemPrice" required>
+                        </div>
+                        <div class="d-flex justify-content-between">
+                            <button type="button" class="btn btn-outline-danger">Clear</button>
+                            <button type="button" class="btn btn-outline-danger">Delete</button>
+                            <button type="button" class="btn btn-outline-danger">Update</button>
+                            <button type="button" class="btn btn-outline-danger">Save</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+
+        <!-- Table Column -->
+        <div class="col-lg-8">
+            <div class="card border-warning">
+                <div class="card-header bg-warning text-dark">
+                    <h5 class="mb-0">Item List</h5>
+                </div>
+                <div class="table-responsive">
+                    <table class="table table-striped table-hover">
+                        <thead>
+                        <tr>
+                            <th scope="col">ID</th>
+                            <th scope="col">Name</th>
+                            <th scope="col">Category</th>
+                            <th scope="col">Price</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <tr>
+                            <th scope="row">1</th>
+                            <td>Apple</td>
+                            <td>Category 1</td>
+                            <td>RS10</td>
+                        </tr>
+                        <tr>
+                            <th scope="row">2</th>
+                            <td>Banana</td>
+                            <td>Category 2</td>
+                            <td>RS15</td>
+                        </tr>
+                        <tr>
+                            <th scope="row">3</th>
+                            <td>Carrot</td>
+                            <td>Category 1</td>
+                            <td>RS20</td>
+                        </tr>
+                        <tr>
+                            <th scope="row">4</th>
+                            <td>Tomato</td>
+                            <td>Category 3</td>
+                            <td>RS25</td>
+                        </tr>
+                        <tr>
+                            <th scope="row">5</th>
+                            <td>Egg</td>
+                            <td>Category 2</td>
+                            <td>RS30</td>
+                        </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+
+
+
+
+
+<!--Order-->
+<div class="container mt-5 border" id="order-section" style="background-color: #f8f9fa">
+    <h1 class="mb-4 text-center">Order Managment</h1>
+    <div class="row">
+
+        <!--Invoice details card-->
+        <div class="col-lg-4 mt-3">
+            <div class="card">
+                <div class="card-header" style="background-color: #11d13b; color: black">
+                    Invoice details
+                </div>
+                <div class="p-3">
+
+                    <!-- Order ID and Date in one row -->
+                    <div class="row g-2 mb-2">
+                        <div class="col">
+                            <label for="orderID" class="form-label">Order ID</label>
+                            <input type="text" class="form-control" id="-orderID" placeholder="Order ID">
+                        </div>
+                        <div class="col">
+                            <label for="date" class="form-label">Date</label>
+                            <input type="date" class="form-control" id="date" placeholder="Date">
+                        </div>
+                    </div>
+
+                    <!-- Customer ID and Customer Name in one row -->
+                    <div class="row g-2 mb-2">
+                        <div class="col">
+                            <label for="autoSizingSelect" class="form-label">Customer ID</label>
+                            <select class="form-select" id="autoSizingSelect">
+                                <option selected>Select customer ID</option>
+                                <option value="1">1</option>
+                                <option value="2">2</option>
+                                <option value="3">3</option>
+                            </select>
+                        </div>
+                        <div class="col">
+                            <label for="customerName" class="form-label">Customer Name</label>
+                            <input type="text" class="form-control" id="-customerName" placeholder="Customer Name">
+                        </div>
+                    </div>
+
+                    <!-- Address and Telephone Number in one row -->
+                    <div class="row g-2 mb-2">
+                        <div class="col">
+                            <label for="address" class="form-label">Address</label>
+                            <input type="text" class="form-control" id="address" placeholder="Customer Address">
+                        </div>
+                    </div>
+
+                    <div class="row g-2 mb-2">
+                        <div class="col">
+                            <label for="tel" class="form-label">Telephone Number</label>
+                            <input type="tel" class="form-control" id="tel" placeholder="Tel">
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+
+
+        <!--Item select card-->
+        <div class="col-lg-5 mt-3">
+            <div class="card">
+                <div class="card-header" style="background-color: #11d13b; color: black">
+                    Item details
+                </div>
+
+                <div class="row g-3 p-3">
+                    <!-- Item ID -->
+                    <div class="col-lg-6 col-md-6 col-sm-12">
+                        <label class="form-label">Item ID</label>
+                        <select class="form-select">
+                            <option selected>Select item ID</option>
+                            <option value="1">1</option>
+                            <option value="2">2</option>
+                            <option value="3">3</option>
+                        </select>
+                    </div>
+
+                    <!-- Item Name -->
+                    <div class="col-lg-6 col-md-6 col-sm-12">
+                        <label for="inputName" class="form-label">Item name</label>
+                        <input type="text" class="form-control" id="inputName" placeholder="Item name">
+                    </div>
+                </div>
+
+                <div class="row g-3 p-3">
+                    <!-- Unit Price -->
+                    <div class="col-lg-4 col-md-6 col-sm-12">
+                        <label for="inputUnitPrice" class="form-label">Unit price</label>
+                        <input type="text" class="form-control" id="inputUnitPrice" placeholder="Unit price">
+                    </div>
+
+                    <!-- QTY on Hand -->
+                    <div class="col-lg-4 col-md-6 col-sm-12">
+                        <label for="qtyOnHand" class="form-label">QTY on hand</label>
+                        <input type="text" class="form-control" id="qtyOnHand" placeholder="Qty on hand">
+                    </div>
+
+                    <!-- QTY -->
+                    <div class="col-lg-4 col-md-6 col-sm-12">
+                        <label class="form-label">QTY</label>
+                        <input type="text" class="form-control" placeholder="Qty">
+                    </div>
+                </div>
+
+                <div class="row g-3 p-3">
+                    <!-- Total -->
+                    <div class="col-lg-6 col-md-6 col-sm-12">
+                        <label class="form-label">Total</label>
+                        <input type="text" class="form-control" placeholder="Total">
+                    </div>
+                </div>
+
+                <!--add to cart button-->
+                <button class="cartBtn m-3 ">
+                    <svg class="cart" fill="white" viewBox="0 0 576 512" height="1em" xmlns="http://www.w3.org/2000/svg"><path d="M0 24C0 10.7 10.7 0 24 0H69.5c22 0 41.5 12.8 50.6 32h411c26.3 0 45.5 25 38.6 50.4l-41 152.3c-8.5 31.4-37 53.3-69.5 53.3H170.7l5.4 28.5c2.2 11.3 12.1 19.5 23.6 19.5H488c13.3 0 24 10.7 24 24s-10.7 24-24 24H199.7c-34.6 0-64.3-24.6-70.7-58.5L77.4 54.5c-.7-3.8-4-6.5-7.9-6.5H24C10.7 48 0 37.3 0 24zM128 464a48 48 0 1 1 96 0 48 48 0 1 1 -96 0zm336-48a48 48 0 1 1 0 96 48 48 0 1 1 0-96z"></path></svg>
+                    ADD TO CART
+                    <svg xmlns="http://www.w3.org/2000/svg" height="1em" viewBox="0 0 640 512" class="product"><path d="M211.8 0c7.8 0 14.3 5.7 16.7 13.2C240.8 51.9 277.1 80 320 80s79.2-28.1 91.5-66.8C413.9 5.7 420.4 0 428.2 0h12.6c22.5 0 44.2 7.9 61.5 22.3L628.5 127.4c6.6 5.5 10.7 13.5 11.4 22.1s-2.1 17.1-7.8 23.6l-56 64c-11.4 13.1-31.2 14.6-44.6 3.5L480 197.7V448c0 35.3-28.7 64-64 64H224c-35.3 0-64-28.7-64-64V197.7l-51.5 42.9c-13.3 11.1-33.1 9.6-44.6-3.5l-56-64c-5.7-6.5-8.5-15-7.8-23.6s4.8-16.6 11.4-22.1L137.7 22.3C155 7.9 176.7 0 199.2 0h12.6z"></path></svg>
+                </button>
+            </div>
+        </div>
+
+
+
+
+
+
+
+
+
+
+        <!--Order Price Summary Div-->
+        <div class="col-lg-3 mt-3">
+            <div class="card searchCustomerCard">
+                <div class="card-header" id="OrderPriceCardTitle" style="background-color: rgb(17,209,59); color: rgb(0,0,0); padding: 8px;">
+                    Total Price
+                </div>
+                <div class="card-body p-2">
+                    <!-- Total Price -->
+                    <div id="totalPriceDiv" class="mb-2">
+                        <h5 class="m-0">Total :</h5>
+                        <h4 class="m-0"></h4>
+                    </div>
+
+                    <!-- Sub Total Price -->
+                    <div id="subTotalPriceDiv" class="mb-4">
+                        <h5 class="m-0">Sub Total :</h5>
+                        <h4 class="m-0"></h4>
+                    </div>
+
+                    <!-- Cash Input -->
+                    <div class="mb-2">
+                        <label for="cash" class="form-label">Cash</label>
+                        <input type="text" class="form-control form-control-sm" id="cash" placeholder="Cash Amount">
+                    </div>
+
+                    <!-- Discount Input -->
+                    <div class="mb-2">
+                        <label for="discount" class="form-label">Discount %</label>
+                        <input type="number" class="form-control form-control-sm" id="discount" placeholder="Discount Amount">
+                    </div>
+
+                    <!-- Balance Input -->
+                    <div class="mb-4">
+                        <label for="balance" class="form-label">Balance</label>
+                        <input type="text" class="form-control form-control-sm" id="balance" placeholder="Balance">
+                    </div>
+
+                    <!-- Place Order Button -->
+                    <div>
+                        <button type="button" class="btn btn-success btn-sm w-100" data-bs-toggle="modal" data-bs-target="#place-order-modal">
+                            Place Order
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+    <table class="table table-bordered mt-3">
+        <thead class="table-striped table-dark">
+        <tr>
+            <th scope="col">Item Code</th>
+            <th scope="col">Item Name</th>
+            <th scope="col">Price (Rs)</th>
+            <th scope="col">Quantity</th>
+            <th scope="col">Total Price</th>
+            <th scope="col">Action</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr>
+            <td>1</td>
+            <td>Apple</td>
+            <td>50.00</td>
+            <td>2</td>
+            <td>100.00</td>
+            <td>
+                <button class="btn btn-danger btn-sm">Remove</button>
+            </td>
+        </tr>
+        <tr>
+            <td>4</td>
+            <td>Orange</td>
+            <td>60.00</td>
+            <td>1</td>
+            <td>60.00</td>
+            <td>
+                <button class="btn btn-danger btn-sm">Remove</button>
+            </td>
+        </tr>
+        <tr>
+            <td>8</td>
+            <td>Milk</td>
+            <td>200.00</td>
+            <td>2</td>
+            <td>400.00</td>
+            <td>
+                <button class="btn btn-danger btn-sm">Remove</button>
+            </td>
+        </tr>
+        </tbody>
+    </table>
+</div>
+
+
+
+
+
+
+
+
+
+<!--Order Details-->
+<div class="container border mt-5" id="order-detail-section" style="background-color: #f8f9fa">
+    <h1 class="mb-4 text-center">Order Details</h1>
+
+    <!-- Search Bar and Dropdown -->
+    <div class="row mb-3">
+        <div class="col-lg-4">
+            <input type="text" class="form-control">
+        </div>
+        <div class="col-lg-4">
+            <select class="form-select" aria-label="Select item category">
+                <option selected>Search by</option>
+                <option value="1">ID</option>
+                <option value="2">Name</option>
+            </select>
+        </div>
+        <div class="col-lg-4">
+            <button class="btn btn-primary">Search</button>
+        </div>
+    </div>
+
+
+
+    <!-- Order Information -->
+    <div class="row mb-4">
+        <div class="col-md-6">
+            <div class="form-group">
+                <label for="orderID">Order ID:</label>
+                <p id="orderID" class="form-control">order ID</p>
+            </div>
+            <div class="form-group">
+                <label for="orderDate">Date:</label>
+                <p id="orderDate" class="form-control">date</p>
+            </div>
+            <div class="form-group">
+                <label for="customerID">Customer ID:</label>
+                <p id="customerID" class="form-control">customer ID</p>
+            </div>
+        </div>
+        <div class="col-md-6">
+            <div class="form-group">
+                <label for="customerName">Customer Name:</label>
+                <p id="customerName" class="form-control">customer name</p>
+            </div>
+            <div class="form-group">
+                <label for="customerAddress">Customer Address:</label>
+                <p id="customerAddress" class="form-control">customer address</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- Price Details -->
+    <div class="row mb-4">
+        <div class="col-md-4">
+            <div class="form-group">
+                <label for="discountPrice">Discount Price (Rs):</label>
+                <p id="discountPrice" class="form-control">0.00</p>
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div class="form-group">
+                <label for="total">Total (Rs):</label>
+                <p id="total" class="form-control">0.00</p>
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div class="form-group">
+                <label for="subTotal">Sub Total (Rs):</label>
+                <p id="subTotal" class="form-control">0.00</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- Items Table -->
+    <h4 class="mb-3">Items</h4>
+    <table class="table table-bordered">
+        <thead class="table-striped table-dark">
+        <tr>
+            <th>Item ID</th>
+            <th>Item Name</th>
+            <th>Quantity</th>
+            <th>Unit price (Rs)</th>
+            <th>Total (Rs)</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr>
+            <td>9</td>
+            <td>Apple</td>
+            <td>2</td>
+            <td>50.00</td>
+            <td>100.00</td>
+        </tr>
+        <tr>
+            <td>2</td>
+            <td>Orange</td>
+            <td>1</td>
+            <td>50.00</td>
+            <td>50.00</td>
+        </tr>
+        </tbody>
+    </table>
+
+</div>
+
+
+
+
+
+
+
+
+<script>
+    //nav okkoma ganno
+    let login_nav = document.getElementById("login-nav")
+    let dashboard_nav = document.getElementById("dashboard-nav")
+    let customer_nav=document.getElementById("customer-nav")
+    let item_nav=document.getElementById("item-nav")
+    let order_nav=document.getElementById("order-nav")
+    let order_details_nav=document.getElementById("order-details-nav")
+
+    let login_section=document.getElementById("login-nav")
+    let dashboard_section=document.getElementById("dashboard-section")
+    let customer_section=document.getElementById("customer-section")
+    let item_section=document.getElementById("item-section")
+    let order_section=document.getElementById("order-section")
+    let order_detail_section=document.getElementById("order-detail-section")
+
+
+    customer_section.style.display="none"
+    customer_section.style.display="none"
+    item_section.style.display="none"
+    item_section.style.display="none"
+    order_section.style.display="none"
+    order_detail_section.style.display="none"
+    dashboard_nav.style.color = "white"
+
+    customer_nav.addEventListener('click',function (){
+        dashboard_section.style.display = "none"
+        customer_section.style.display = "block"
+        item_section.style.display = "none"
+        order_section.style.display = "none"
+        order_detail_section.style.display = "none"
+
+        customer_nav.style.color = "white"
+        dashboard_nav.style.color = ""
+        item_nav.style.color = ""
+        order_nav.style.color = ""
+        order_details_nav.style.color = ""
+    })
+
+    item_nav.addEventListener('click',function (){
+        dashboard_section.style.display="none"
+        customer_section.style.display="none"
+        item_section.style.display="block"
+        order_section.style.display="none"
+        order_detail_section.style.display="none"
+
+        customer_nav.style.color = ""
+        dashboard_nav.style.color = ""
+        item_nav.style.color = "white"
+        order_nav.style.color = ""
+        order_details_nav.style.color = ""
+    })
+
+    order_nav.addEventListener('click',function (){
+        dashboard_section.style.display="none"
+        customer_section.style.display="none"
+        item_section.style.display="none"
+        order_section.style.display="block"
+        order_detail_section.style.display="none"
+
+        customer_nav.style.color = ""
+        dashboard_nav.style.color = ""
+        item_nav.style.color = ""
+        order_nav.style.color = "white"
+        order_details_nav.style.color = ""
+    })
+
+    order_details_nav.addEventListener('click',function (){
+        dashboard_section.style.display="none"
+        customer_section.style.display="none"
+        item_section.style.display="none"
+        order_section.style.display="none"
+        order_detail_section.style.display="block"
+
+        customer_nav.style.color = ""
+        dashboard_nav.style.color = ""
+        item_nav.style.color = ""
+        order_nav.style.color = ""
+        order_details_nav.style.color = "white"
+    })
+
+    dashboard_nav.addEventListener('click',function (){
+        dashboard_section.style.display="block"
+        customer_section.style.display="none"
+        item_section.style.display="none"
+        order_section.style.display="none"
+        order_detail_section.style.display="none"
+
+
+        customer_nav.style.color = ""
+        dashboard_nav.style.color = "white"
+        item_nav.style.color = ""
+        order_nav.style.color = ""
+        order_details_nav.style.color = ""
+    })
+
+
+</script>
+
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>
