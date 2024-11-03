@@ -1,180 +1,123 @@
-import ItemModel from "../models/itemModel.js";
-import {customer_array, item_array, order_array} from "../db/database.js";
+///////////////////////////////////////////////////////
+/*Item Save & Table update*/
+//////////////////////////////////////////////////////
+import {ItemDB} from "../db/database.js";
+import ItemModel from "../Model/itemModel.js";
 
-// selected item for update or delete
-let selected_item_index = null;
+let selected_item_Index = null;
 
-// Select row in the table
-let selectedRowIndex = '';
+$("#SaveItem").on("click", function() {
+    let Item_Name = $("#itemName").val();
+    let Item_Description = $("#itemDescription").val();
+    let Item_Price = $("#price").val();
+    let Item_Quantity = $("#qty").val();
 
-let itemID = 1;
+    console.log()
 
-// generate new item ID
-$('#itemId').val(item_array.length+1);
+    /*let itemData = {
+        id : ItemDB.length + 1,
+        ItemName : Item_Name,
+        ItemDescription : Item_Description,
+        ItemPrice : Item_Price,
+        ItemQuantity : Item_Quantity
+    }*/
+    let item = new ItemModel(
+        ItemDB.length + 1,
+        Item_Name,
+        Item_Description,
+        Item_Quantity,
+        Item_Price
+    );
 
-// QtyOnHand Regex
-const validateQtyOnHand = (itemQtyOnHand) => {
-    const qtyOnHandRegex = /^\d+$/;
-    return qtyOnHandRegex.test(itemQtyOnHand);
-}
+    ItemDB.push(item);
+    itemTable();
+    clearForm();
+});
 
-// Unit price Regex
-const validateUnitPrice = (itemUnitPrice) => {
-    const unitPriceRegex = /^\d+(\.\d{1,2})?$/;
-    return unitPriceRegex.test(itemUnitPrice);
-}
+///////////////////////////////////////////////////////
+/*Table update*/
+//////////////////////////////////////////////////////
 
-// hide update button on item add screen
-$('#item_update_btn').hide();
-
-// Clear form fields
-const clearFields = () => {
-    $("#itemId").val('');
-    $("#itemName").val('');
-    $("#itemUnitPrice").val('');
-    $("#itemQtyOnHand").val('');
-    generateNewItemId();
-    $('#item_save_btn').show();
-    $('#item_update_btn').hide();
-    selectedRowIndex = -1;
-};
-
-// Generate new item ID
-const generateNewItemId = () => {
-
-    if (item_array.length === 0) {
-        itemID = 1;
-        $('#itemId').val(itemID);
-    } else {
-        // methana karanne item array eke thiyena anthima object eke id eka aragena eekata ekak ekathu karna eka
-        itemID = item_array[item_array.length-1]._itemId+1;
-        $('#itemId').val(itemID);
-    }
-
-}
-
-// Load item table
-const loadItemTable = () => {
-    $("#itemTableBody").empty();
-    item_array.map((itm, ) => {
-        console.log(itm);
-        let data = `<tr><td>${itm._itemId}</td><td>${itm._itemName}</td><td>${itm._itemUnitPrice}</td><td>${itm._itemQtyOnHand}</td></tr>`
-        $("#itemTableBody").append(data);
+const itemTable = () => {
+    $("#ItemTable").empty();
+    ItemDB.map((item,index) => {
+        let Data = `<tr>
+            <td>${item.Itemid}</td>
+            <td>${item.itemName}</td>
+            <td>${item.itemDescription}</td>
+            <td>${item.qty}</td>
+            <td>${item.price}</td>
+            </tr>`
+        $("#ItemTable").append(Data);
     });
 }
 
-// Clear fields button
-$("#item_clear_btn").on("click", function () {
-    clearFields();
-});
+///////////////////////////////////////////////////////
+/*Clear Form*/
+//////////////////////////////////////////////////////
 
-// Save item and load table
-$("#item_save_btn").on("click", function (event) {
-    event.preventDefault();
+const clearForm = () => {
+    $('#itemName').val('');
+    $('#itemDescription').val('');
+    $('#qty').val('');
+    $('#price').val('');
+}
+///////////////////////////////////////////////////////
+/*Item Update & Table update*/
+//////////////////////////////////////////////////////
 
-    let itemName = $('#itemName').val(); // empty
-    let itemUnitPrice = $('#itemUnitPrice').val(); // empty
-    let itemQtyOnHand = $('#itemQtyOnHand').val(); // empty, format
+$('#item_update_button').on('click', function() {
+    let Item_name = $('#itemName').val();
+    let Item_description = $('#itemDescription').val();
+    let Item_quantity = $('#qty').val();
+    let Item_price = $('#price').val();
 
-    if(itemName.length===0) {
-        Swal.fire({
-            icon: "error",
-            title: "Invalid Input",
-            text: "Invalid Item Name!",
-        });
-    } else if(!validateUnitPrice(itemUnitPrice)) {
-        Swal.fire({
-            icon: "error",
-            title: "Invalid Input",
-            text: "Please enter unit price field numbers only!",
-        });
-    } else if(!validateQtyOnHand(itemQtyOnHand)) {
-        Swal.fire({
-            icon: "error",
-            title: "Invalid Input",
-            text: "Please enter QTY on hand field numbers only!",
-        });
-    } else {
+    if (selected_item_Index !== undefined && selected_item_Index < ItemDB.length){
 
-        let item = new ItemModel(
-            itemID,
-            itemName,
-            itemUnitPrice,
-            itemQtyOnHand
+        let itemData = new ItemModel(
+            ItemDB[selected_item_Index].Itemid,
+            Item_name,
+            Item_description,
+            Item_quantity,
+            Item_price
         );
 
-        item_array.push(item);
-        loadItemTable();
-        clearFields();
+        ItemDB[selected_item_Index] = itemData;
 
-        Swal.fire({
-            position: "top-end",
-            icon: "success",
-            title: "Item has been saved",
-            showConfirmButton: false,
-            timer: 1500
-        });
+        itemTable();
+        clearForm();
+    } else {
+        alert('Please select an item to update');
     }
 });
 
-// Update selected item
-$("#item_update_btn").on("click", function () {
+///////////////////////////////////////////////////////
+/*Filling the Forms after click the table row*/
+//////////////////////////////////////////////////////
 
-    let index = selected_item_index;
+$('#ItemTable').on('click','tr', function () {
+    let value = $(this).index();
 
-    let itemName = $('#itemName').val();
-    let itemUnitPrice = $('#itemUnitPrice').val();
-    let itemQtyOnHand = $('#itemQtyOnHand').val();
+    selected_item_Index = $(this).index();
 
-    if(itemName.length===0) {
-        Swal.fire({
-            icon: "error",
-            title: "Invalid Input",
-            text: "Invalid Item Name!",
-        });
-    } else if(!validateUnitPrice(itemUnitPrice)) {
-        Swal.fire({
-            icon: "error",
-            title: "Invalid Input",
-            text: "Please enter unit price field numbers only!",
-        });
-    } else if(!validateQtyOnHand(itemQtyOnHand)) {
-        Swal.fire({
-            icon: "error",
-            title: "Invalid Input",
-            text: "Please enter QTY on hand field numbers only!",
-        });
-    } else {
+    let item_obj = ItemDB[value];
 
-        let item = new ItemModel(
-            item_array[index]._itemId,
-            itemName,
-            itemUnitPrice,
-            itemQtyOnHand
-        );
+    let item_name = item_obj.itemName;
+    let item_description = item_obj.itemDescription;
+    let item_quantity = item_obj.qty;
+    let item_price = item_obj.price;
 
-        // update item
-        item_array[selected_item_index] = item;
-
-        // clean item form
-        clearFields();
-
-        // reload the table
-        loadItemTable();
-
-        Swal.fire({
-            position: "top-end",
-            icon: "success",
-            title: "Item update successfully",
-            showConfirmButton: false,
-            timer: 1500
-        });
-    }
+    $('#itemName').val(item_name);
+    $('#itemDescription').val(item_description);
+    $('#qty').val(item_quantity);
+    $('#price').val(item_price);
 });
 
-// Delete item
-$("#item_delete_btn").on('click', function () {
+///////////////////////////////////////////////////////
+/*Item Delete*/
+//////////////////////////////////////////////////////
 
+$('#item_delete_button').on('click', function() {
     const swalWithBootstrapButtons = Swal.mixin({
         customClass: {
             confirmButton: "btn btn-success",
@@ -192,20 +135,12 @@ $("#item_delete_btn").on('click', function () {
         reverseButtons: true
     }).then((result) => {
         if (result.isConfirmed) {
-
-            // when pressing confirm button
-            item_array.splice(selected_item_index, 1);
-
-            // clean item form
-            clearFields();
-
-            // reload the table
-            loadItemTable();
-            // ==========================================================
-
+            ItemDB.splice(selected_item_Index, 1);
+            itemTable();
+            clearForm();
             swalWithBootstrapButtons.fire({
                 title: "Deleted!",
-                text: "Your item has been deleted.",
+                text: "Item has been deleted.",
                 icon: "success"
             });
         } else if (
@@ -219,33 +154,4 @@ $("#item_delete_btn").on('click', function () {
             });
         }
     });
-
 });
-
-// table row load to field
-$('#itemTableBody').on('click', 'tr', function () {
-    $('#item_update_btn').show();
-    $('#item_save_btn').hide();
-
-    // get tr index
-    let index = $(this).index();
-
-    selected_item_index = $(this).index();
-
-    // get item object by index
-    let item_obj = item_array[index];
-
-    // get item's data
-    let id = item_obj._itemId;
-    let name = item_obj._itemName;
-    let unitPrice = item_obj._itemUnitPrice;
-    let qtyOnHand = item_obj._itemQtyOnHand;
-
-    // fill data into the form
-    $('#itemId').val(id);
-    $('#itemName').val(name);
-    $('#itemUnitPrice').val(unitPrice);
-    $('#itemQtyOnHand').val(qtyOnHand);
-
-});
-
